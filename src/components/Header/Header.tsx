@@ -12,16 +12,16 @@ interface INavigationItems {
 
 const navigation: INavigationItems[] = [
   {
-    name: 'Main',
+    name: 'MAIN',
     link: '/',
   },
   {
-    name: 'About us',
-    link: 'about-us',
+    name: 'ABOUT US',
+    link: '/about-us',
   },
   {
     name: '404',
-    link: 'about',
+    link: '/not-found',
   },
 ];
 
@@ -40,7 +40,9 @@ class Header extends React.Component<IHeaderProps> {
               {navigation.map((el, index) => {
                 return (
                   <li key={index} className="navigation-item">
-                    <Link to={el.link}>{el.name}</Link>
+                    <Link className="navigation-item-link" to={el.link}>
+                      {el.name}
+                    </Link>
                   </li>
                 );
               })}

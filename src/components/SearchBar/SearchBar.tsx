@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css';
 
 interface ISearchBarState {
   value: string;
@@ -22,14 +23,15 @@ class SearchBar extends React.Component<object, ISearchBarState> {
 
   render() {
     return (
-      <div>
+      <div className="search-container">
         <input
+          className="search-bar"
           type="search"
           placeholder="Type your request here..."
           value={this.state.value}
           onChange={(e) => this.handleChange(e.target.value)}
         />
-        <input type="button" value="search" />
+        <input className="search-bar-button" type="button" value="SEARCH" />
       </div>
     );
   }
