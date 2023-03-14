@@ -1,0 +1,21 @@
+.header {
+  background-color: cadetblue;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.header-title {
+  display: inline;
+  margin: 0;
+}
+.navigation {
+  display: inline;
+  margin: 0px 20px;
+}
+.navigation-list {
+  display: inline-flex;
+  gap: 20px
+}
+.navigation-item {
+  list-style-type: none;
+}

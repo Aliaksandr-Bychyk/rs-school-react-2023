@@ -6,6 +6,7 @@ class NotFound extends React.Component {
     return (
       <>
         <Header title="404" />
+        <h2>404</h2>
       </>
     );
   }
