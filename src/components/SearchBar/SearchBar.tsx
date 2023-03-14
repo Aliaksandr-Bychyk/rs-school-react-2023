@@ -1,15 +1,11 @@
 import React from 'react';
 
-interface ISearchBarProps {
-  id?: string;
-}
-
 interface ISearchBarState {
   value: string;
 }
 
-class SearchBar extends React.Component<ISearchBarProps, ISearchBarState> {
-  constructor(props: ISearchBarProps) {
+class SearchBar extends React.Component<object, ISearchBarState> {
+  constructor(props: object) {
     super(props);
     this.state = {
       value: window.localStorage.getItem('search-value') as string,
