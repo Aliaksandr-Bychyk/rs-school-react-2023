@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Card from '../components/Card/Card';
-import Header from '../components/Header/Header';
-import SearchBar from '../components/SearchBar/SearchBar';
-import ICardData from '../interfaces/ICardData';
+import Card from '../../components/Card/Card';
+import Header from '../../components/Header/Header';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import ICardData from '../../interfaces/ICardData';
 import './Main.css';
 
 interface IMainState {
