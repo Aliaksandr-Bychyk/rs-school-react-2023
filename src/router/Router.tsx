@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AboutUs from '../pages/AboutUs';
+import AboutUs from '../pages/AboutUs/AboutUs';
 import Main from '../pages/Main/Main';
 import NotFound from '../pages/NotFound/NotFound';
 
