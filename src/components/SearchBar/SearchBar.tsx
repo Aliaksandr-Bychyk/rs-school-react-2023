@@ -9,7 +9,7 @@ class SearchBar extends React.Component<object, ISearchBarState> {
   constructor(props: object) {
     super(props);
     this.state = {
-      value: window.localStorage.getItem('search-value') as string,
+      value: (window.localStorage.getItem('search-value') as string) ?? '',
     };
   }
 
