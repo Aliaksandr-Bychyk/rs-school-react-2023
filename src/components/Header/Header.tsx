@@ -20,6 +20,10 @@ const navigation: INavigationItems[] = [
     link: '/about-us',
   },
   {
+    name: 'FORM',
+    link: '/form',
+  },
+  {
     name: '404',
     link: '/not-found',
   },
