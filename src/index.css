@@ -15,3 +15,6 @@ body {
   flex-direction: column;
   background-color: #EDE7FB;
 }
+.page-container {
+  margin: 20px;
+}
