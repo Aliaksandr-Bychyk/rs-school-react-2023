@@ -8,9 +8,11 @@ import IFormCardData from 'interfaces/IFormCardData';
 
 import './Form.css';
 import './FormControl/FormControl.css';
+import Popup from '../../components/Popup/Popup';
 
 interface IFormState {
   cardData: IFormCardData[];
+  showPopup: boolean;
 }
 
 class Form extends React.Component<object, IFormState> {
@@ -33,6 +35,7 @@ class Form extends React.Component<object, IFormState> {
     this.formSubscribe = createRef();
     this.state = {
       cardData: [],
+      showPopup: false,
     };
   }
   checkGender() {
@@ -41,6 +44,7 @@ class Form extends React.Component<object, IFormState> {
     }
     return this.formGenderFemale.current!.value;
   }
+
   resetForm() {
     this.formName.current!.value = '';
     this.formDate.current!.value = '';
@@ -49,19 +53,25 @@ class Form extends React.Component<object, IFormState> {
     this.formQuote.current!.value = 'alan';
     this.formSubscribe.current!.checked = false;
   }
+
   handleSubmit() {
     const obj: IFormCardData = {
       name: this.formName.current!.value,
       birthday: this.formDate.current!.value,
       gender: this.checkGender(),
-      picture: this.formFile.current!.value,
+      picture: this.formFile.current!.files![0].name,
       quote: this.formQuote.current!.value,
       isSubscribed: this.formSubscribe.current!.checked,
     };
     console.log(obj);
-    this.setState({ cardData: [obj, ...this.state.cardData] });
+    this.setState({ cardData: [obj, ...this.state.cardData], showPopup: true });
     this.resetForm();
+    // this.setState = true;
+    setTimeout(() => {
+      this.setState({ cardData: this.state.cardData, showPopup: false });
+    }, 3000);
   }
+
   render() {
     return (
       <>
@@ -86,6 +96,7 @@ class Form extends React.Component<object, IFormState> {
             ))}
           </div>
         </div>
+        {this.state.showPopup && <Popup />}
       </>
     );
   }

@@ -1,3 +1,16 @@
+interface IQuoutePerson {
+  name: string;
+  quote: string;
+}
+
+interface IQuoute {
+  alan: IQuoutePerson;
+  neli: IQuoutePerson;
+  sally: IQuoutePerson;
+  doug: IQuoutePerson;
+  john: IQuoutePerson;
+}
+
 const quotes = {
   alan: {
     name: 'Alan Shepard',
@@ -22,3 +35,4 @@ const quotes = {
 };
 
 export default quotes;
+export type { IQuoute };
