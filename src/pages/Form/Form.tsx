@@ -10,7 +10,8 @@ import './FormControl/FormControl.css';
 class Form extends React.Component<object> {
   formName: React.RefObject<HTMLInputElement>;
   formDate: React.RefObject<HTMLInputElement>;
-  formGender: React.RefObject<HTMLInputElement>;
+  formGenderMale: React.RefObject<HTMLInputElement>;
+  formGenderFemale: React.RefObject<HTMLInputElement>;
   formFile: React.RefObject<HTMLInputElement>;
   formQuote: React.RefObject<HTMLSelectElement>;
   formSubscribe: React.RefObject<HTMLInputElement>;
@@ -19,20 +20,33 @@ class Form extends React.Component<object> {
     super(props);
     this.formName = createRef();
     this.formDate = createRef();
-    this.formGender = createRef();
+    this.formGenderMale = createRef();
+    this.formGenderFemale = createRef();
     this.formFile = createRef();
     this.formQuote = createRef();
     this.formSubscribe = createRef();
+  }
+  handleCheckGender() {
+    if (this.formGenderMale.current?.checked) {
+      return this.formGenderMale.current?.value;
+    }
+    return this.formGenderFemale.current?.value;
   }
   handleSubmit() {
     console.log({
       name: this.formName.current?.value,
       birthday: this.formDate.current?.value,
-      gender: this.formGender.current?.value,
+      gender: this.handleCheckGender(),
       picture: this.formFile.current?.value,
       quote: this.formQuote.current?.value,
       subscribe: this.formSubscribe.current?.checked,
     });
+    this.formName.current!.value = '';
+    this.formDate.current!.value = '';
+    this.formGenderMale.current!.checked = true;
+    this.formFile.current!.value = '';
+    this.formQuote.current!.value = 'alan';
+    this.formSubscribe.current!.checked = false;
   }
   render() {
     return (
@@ -44,7 +58,8 @@ class Form extends React.Component<object> {
               formRef={{
                 formName: this.formName,
                 formDate: this.formDate,
-                formGender: this.formGender,
+                formGenderMale: this.formGenderMale,
+                formGenderFemale: this.formGenderFemale,
                 formFile: this.formFile,
               }}
             />

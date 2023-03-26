@@ -6,7 +6,8 @@ interface IFormPerosnalProps {
   formRef: {
     formName: React.RefObject<HTMLInputElement>;
     formDate: React.RefObject<HTMLInputElement>;
-    formGender: React.RefObject<HTMLInputElement>;
+    formGenderMale: React.RefObject<HTMLInputElement>;
+    formGenderFemale: React.RefObject<HTMLInputElement>;
     formFile: React.RefObject<HTMLInputElement>;
   };
 }
@@ -32,7 +33,7 @@ class FormPersonal extends Component<IFormPerosnalProps> {
               name: 'gender',
               value: 'male',
               defaultChecked: true,
-              ref: this.props.formRef.formGender,
+              ref: this.props.formRef.formGenderMale,
             }}
             isReversed={true}
           />
@@ -42,7 +43,7 @@ class FormPersonal extends Component<IFormPerosnalProps> {
               type: 'radio',
               name: 'gender',
               value: 'female',
-              ref: this.props.formRef.formGender,
+              ref: this.props.formRef.formGenderFemale,
             }}
             isReversed={true}
           />
