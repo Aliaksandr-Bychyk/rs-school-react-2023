@@ -13,6 +13,7 @@ import Popup from '../../components/Popup/Popup';
 interface IFormState {
   cardData: IFormCardData[];
   showPopup: boolean;
+  isSuccessPopup: boolean;
 }
 
 class Form extends React.Component<object, IFormState> {
@@ -36,6 +37,7 @@ class Form extends React.Component<object, IFormState> {
     this.state = {
       cardData: [],
       showPopup: false,
+      isSuccessPopup: false,
     };
   }
   checkGender() {
@@ -66,9 +68,8 @@ class Form extends React.Component<object, IFormState> {
     console.log(obj);
     this.setState({ cardData: [obj, ...this.state.cardData], showPopup: true });
     this.resetForm();
-    // this.setState = true;
     setTimeout(() => {
-      this.setState({ cardData: this.state.cardData, showPopup: false });
+      this.setState({ showPopup: false });
     }, 3000);
   }
 
@@ -96,7 +97,7 @@ class Form extends React.Component<object, IFormState> {
             ))}
           </div>
         </div>
-        {this.state.showPopup && <Popup />}
+        {this.state.showPopup && <Popup isSuccessful={this.state.isSuccessPopup} />}
       </>
     );
   }
