@@ -1,3 +1,4 @@
+import cards from '../../data/cards';
 import React, { Component } from 'react';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
@@ -13,15 +14,8 @@ class Main extends Component<object, IMainState> {
   constructor(props: object) {
     super(props);
     this.state = {
-      items: [],
+      items: cards,
     };
-  }
-  componentDidMount() {
-    fetch('https://api.spaceflightnewsapi.net/v3/articles?_limit=20')
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ items: data });
-      });
   }
 
   render() {
