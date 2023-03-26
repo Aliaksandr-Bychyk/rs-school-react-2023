@@ -1,3 +1,6 @@
 .form-personal-container {
   width: calc(50vw - 20px);
 }
+.not-valid {
+  color: #ff0000
+}

@@ -14,6 +14,9 @@ interface IFormState {
   cardData: IFormCardData[];
   showPopup: boolean;
   isSuccessPopup: boolean;
+  isValidFormName: boolean;
+  isValidFormDate: boolean;
+  isValidFormFile: boolean;
 }
 
 class Form extends React.Component<object, IFormState> {
@@ -38,6 +41,9 @@ class Form extends React.Component<object, IFormState> {
       cardData: [],
       showPopup: false,
       isSuccessPopup: false,
+      isValidFormName: true,
+      isValidFormDate: true,
+      isValidFormFile: true,
     };
   }
   checkGender() {
@@ -56,21 +62,61 @@ class Form extends React.Component<object, IFormState> {
     this.formSubscribe.current!.checked = false;
   }
 
+  handleValidation() {
+    let isValid = false;
+    if (
+      this.formName.current?.value &&
+      this.formName.current!.value[0] === this.formName.current!.value[0].toUpperCase()
+    ) {
+      this.setState({ isValidFormName: true });
+      isValid = true;
+    } else {
+      this.setState({ isValidFormName: false });
+      isValid = false;
+    }
+    if (this.formDate.current?.value) {
+      this.setState({ isValidFormDate: true });
+      isValid = true;
+    } else {
+      this.setState({ isValidFormDate: false });
+      isValid = false;
+    }
+    if (this.formFile.current?.files![0]) {
+      this.setState({ isValidFormFile: true });
+      isValid = true;
+    } else {
+      this.setState({ isValidFormFile: false });
+      isValid = false;
+    }
+    return isValid;
+  }
+
   handleSubmit() {
-    const obj: IFormCardData = {
-      name: this.formName.current!.value,
-      birthday: this.formDate.current!.value,
-      gender: this.checkGender(),
-      picture: this.formFile.current!.files![0].name,
-      quote: this.formQuote.current!.value,
-      isSubscribed: this.formSubscribe.current!.checked,
-    };
-    console.log(obj);
-    this.setState({ cardData: [obj, ...this.state.cardData], showPopup: true });
-    this.resetForm();
-    setTimeout(() => {
-      this.setState({ showPopup: false });
-    }, 3000);
+    if (this.handleValidation()) {
+      const obj: IFormCardData = {
+        name: this.formName.current!.value,
+        birthday: this.formDate.current!.value,
+        gender: this.checkGender(),
+        picture: this.formFile.current!.files![0].name,
+        quote: this.formQuote.current!.value,
+        isSubscribed: this.formSubscribe.current!.checked,
+      };
+      console.log(obj);
+      this.setState({
+        cardData: [obj, ...this.state.cardData],
+        showPopup: true,
+        isSuccessPopup: true,
+      });
+      this.resetForm();
+      setTimeout(() => {
+        this.setState({ showPopup: false });
+      }, 3000);
+    } else {
+      this.setState({ isSuccessPopup: false, showPopup: true });
+      setTimeout(() => {
+        this.setState({ showPopup: false });
+      }, 3000);
+    }
   }
 
   render() {
@@ -87,6 +133,9 @@ class Form extends React.Component<object, IFormState> {
                 formGenderFemale: this.formGenderFemale,
                 formFile: this.formFile,
               }}
+              isValidFormName={this.state.isValidFormName}
+              isValidFormDate={this.state.isValidFormDate}
+              isValidFormFile={this.state.isValidFormFile}
             />
             <FormQuotes formRef={this.formQuote} />
             <FormControl formRef={this.formSubscribe} handleSubmit={() => this.handleSubmit()} />

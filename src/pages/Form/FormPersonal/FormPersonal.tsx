@@ -10,6 +10,9 @@ interface IFormPerosnalProps {
     formGenderFemale: React.RefObject<HTMLInputElement>;
     formFile: React.RefObject<HTMLInputElement>;
   };
+  isValidFormName: boolean;
+  isValidFormDate: boolean;
+  isValidFormFile: boolean;
 }
 
 class FormPersonal extends Component<IFormPerosnalProps> {
@@ -20,10 +23,18 @@ class FormPersonal extends Component<IFormPerosnalProps> {
     return (
       <div className="form-personal-container">
         <LabeledInput label="Name:" params={{ type: 'text', ref: this.props.formRef.formName }} />
+        {this.props.isValidFormName || (
+          <span className="not-valid">
+            Field should not be empty and it should start with capital letter!
+          </span>
+        )}
         <LabeledInput
           label="Birthday:"
           params={{ type: 'date', ref: this.props.formRef.formDate }}
         />
+        {this.props.isValidFormDate || (
+          <span className="not-valid">Field should not be empty!</span>
+        )}
         <div>
           <span>Gender:</span>
           <LabeledInput
@@ -52,6 +63,7 @@ class FormPersonal extends Component<IFormPerosnalProps> {
           label="Profile picture:"
           params={{ type: 'file', ref: this.props.formRef.formFile }}
         />
+        {this.props.isValidFormFile || <span className="not-valid">You should upload a file!</span>}
       </div>
     );
   }
