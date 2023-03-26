@@ -110,7 +110,7 @@ const cards: ICardData[] = [
   },
   {
     id: 18755,
-    title: 'Cape Congestion: World’s busiest spaceport stretched to its limits',
+    title: "Cape Congestion: World's busiest spaceport stretched to its limits",
     imageUrl:
       'https://i0.wp.com/spacenews.com/wp-content/uploads/2023/03/Falcon-9_GP3_2023-01-18_SapceX.jpg',
     newsSite: 'SpaceNews',
@@ -118,7 +118,7 @@ const cards: ICardData[] = [
   },
   {
     id: 18752,
-    title: 'Blue Origin says an overheated engine part caused last year’s cargo rocket failure',
+    title: "Blue Origin says an overheated engine part caused last year's cargo rocket failure",
     imageUrl:
       'https://image.cnbcfm.com/api/v1/image/107214866-1679675175583-blue_origin_ns23_booster.png',
     newsSite: 'CNBC',
