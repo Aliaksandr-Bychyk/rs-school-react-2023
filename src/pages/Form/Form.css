@@ -2,3 +2,8 @@
   display: flex;
   flex-wrap: wrap;
 }
+.form-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

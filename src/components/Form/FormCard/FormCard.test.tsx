@@ -14,18 +14,18 @@ describe('FormCard', () => {
       isSubscribed: true,
     };
     render(<FormCard data={obj} />);
-    expect(screen.getAllByText(/test/i)).toBeDefined();
+    expect(screen.getAllByText(/his/i)).toBeDefined();
   });
   it('Renders not subscribed', () => {
     const obj = {
       name: 'test',
       birthday: '2001-02-02',
-      gender: 'male',
+      gender: 'female',
       picture: 'test.png',
       quote: 'john',
       isSubscribed: false,
     };
     render(<FormCard data={obj} />);
-    expect(screen.getAllByText(/test/i)).toBeDefined();
+    expect(screen.getAllByText(/her/i)).toBeDefined();
   });
 });
