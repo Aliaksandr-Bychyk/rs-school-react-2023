@@ -144,17 +144,6 @@ class Form extends React.Component<object, IFormState> {
             {this.state.cardData.map((el, index) => (
               <FormCard key={index} data={el} />
             ))}
-            <FormCard
-              key={1}
-              data={{
-                name: 'Aliaksandr',
-                birthday: '2001-04-13',
-                gender: 'male',
-                picture: 'abuba.png',
-                quote: 'neli',
-                isSubscribed: true,
-              }}
-            />
           </div>
         </div>
         {this.state.showPopup && <Popup isSuccessful={this.state.isSuccessPopup} />}
