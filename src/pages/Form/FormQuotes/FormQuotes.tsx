@@ -19,19 +19,12 @@ class FormQuotes extends Component<IFormQuotesProps> {
             <option value="neli">Neil Armstrong</option>
             <option value="sally">Sally Ride</option>
             <option value="doug">Doug Hurley</option>
-            <option value="john">John Swigert </option>
+            <option value="john">John Swigert</option>
           </select>
         </label>
-        <textarea className="form-quotes-textarea" rows={4} readOnly></textarea>
       </div>
     );
   }
 }
 
 export default FormQuotes;
-
-/*FIX YOUR LITTLE PROBLEM AND LIGHT THIS CANDLE.*/
-/* THAT’S ONE SMALL STEP FOR MAN, ONE GIANT LEAP FOR MANKIND. */
-/* THE STARS DON’T LOOK BIGGER, BUT THEY DO LOOK BRIGHTER. */
-/* CONGRATULATIONS, SPACEX, YOU GOT THE FLAG. */
-/* HOUSTON, WE’VE HAD A PROBLEM HERE */
