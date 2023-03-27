@@ -2,7 +2,7 @@ interface IFormCardData {
   name: string;
   birthday: string;
   gender: string;
-  picture: string;
+  picture: File;
   quote: string;
   isSubscribed: boolean;
 }

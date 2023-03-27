@@ -97,7 +97,7 @@ class Form extends React.Component<object, IFormState> {
         name: this.formName.current!.value,
         birthday: this.formDate.current!.value,
         gender: this.checkGender(),
-        picture: this.formFile.current!.files![0].name,
+        picture: this.formFile.current!.files![0],
         quote: this.formQuote.current!.value,
         isSubscribed: this.formSubscribe.current!.checked,
       };

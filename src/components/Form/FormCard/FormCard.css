@@ -5,6 +5,17 @@
   box-shadow: 0px 5px 5px 0px #DBCEF6;
   cursor: default;
 }
+.form-card-profile {
+  display: flex;
+  align-items: center;
+}
+.form-card-picture {
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 .form-card-title {
   margin: 10px;
   font-weight: 700;
