@@ -101,7 +101,6 @@ class Form extends React.Component<object, IFormState> {
         quote: this.formQuote.current!.value,
         isSubscribed: this.formSubscribe.current!.checked,
       };
-      console.log(obj);
       this.setState({
         cardData: [obj, ...this.state.cardData],
         showPopup: true,
