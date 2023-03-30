@@ -62,37 +62,40 @@ class Form extends React.Component<object, IFormState> {
     this.formSubscribe.current!.checked = false;
   }
 
-  handleValidation() {
+  async handleValidation() {
     let isValid = false;
+    let isValidFormName = false;
+    let isValidFormDate = false;
+    let isValidFormFile = false;
+    const date = new Date(this.formDate.current!.value);
+    const fileTypes = ['image/gif', 'image/png', 'image/jpeg'];
+    this.setState({ isValidFormName: false, isValidFormDate: false, isValidFormFile: false });
     if (
       this.formName.current?.value &&
       this.formName.current!.value[0] === this.formName.current!.value[0].toUpperCase()
     ) {
-      this.setState({ isValidFormName: true });
-      isValid = true;
-    } else {
-      this.setState({ isValidFormName: false });
-      isValid = false;
+      isValidFormName = true;
     }
-    if (this.formDate.current?.value) {
-      this.setState({ isValidFormDate: true });
-      isValid = true;
-    } else {
-      this.setState({ isValidFormDate: false });
-      isValid = false;
+    if (this.formDate.current?.value && date < new Date()) {
+      isValidFormDate = true;
     }
-    if (this.formFile.current?.files![0]) {
-      this.setState({ isValidFormFile: true });
-      isValid = true;
-    } else {
-      this.setState({ isValidFormFile: false });
-      isValid = false;
+    if (
+      this.formFile.current?.files![0] &&
+      fileTypes.includes(this.formFile.current?.files![0].type)
+    ) {
+      isValidFormFile = true;
     }
+    isValid = isValidFormDate && isValidFormFile && isValidFormName;
+    await this.setState({
+      isValidFormName: isValidFormName,
+      isValidFormDate: isValidFormDate,
+      isValidFormFile: isValidFormFile,
+    });
     return isValid;
   }
 
-  handleSubmit() {
-    if (this.handleValidation()) {
+  async handleSubmit() {
+    if (await this.handleValidation()) {
       const obj: IFormCardData = {
         name: this.formName.current!.value,
         birthday: this.formDate.current!.value,

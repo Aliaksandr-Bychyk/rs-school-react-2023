@@ -33,7 +33,7 @@ class FormPersonal extends Component<IFormPerosnalProps> {
           params={{ type: 'date', ref: this.props.formRef.formDate }}
         />
         {this.props.isValidFormDate || (
-          <span className="not-valid">Field should not be empty!</span>
+          <span className="not-valid">Field should not be empty and less then current date!</span>
         )}
         <div>
           <span>Gender:</span>
@@ -63,7 +63,9 @@ class FormPersonal extends Component<IFormPerosnalProps> {
           label="Profile picture:"
           params={{ type: 'file', ref: this.props.formRef.formFile }}
         />
-        {this.props.isValidFormFile || <span className="not-valid">You should upload a file!</span>}
+        {this.props.isValidFormFile || (
+          <span className="not-valid">You should upload an image file!</span>
+        )}
       </div>
     );
   }
