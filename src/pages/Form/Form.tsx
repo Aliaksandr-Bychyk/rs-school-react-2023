@@ -1,4 +1,4 @@
-import React, { createRef } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import Header from '../../components/Header/Header';
 import FormPersonal from './FormPersonal/FormPersonal';
 import FormQuotes from './FormQuotes/FormQuotes';
@@ -10,148 +10,122 @@ import './Form.css';
 import './FormControl/FormControl.css';
 import Popup from '../../components/Popup/Popup';
 
-interface IFormState {
-  cardData: IFormCardData[];
-  showPopup: boolean;
-  isSuccessPopup: boolean;
-  isValidFormName: boolean;
-  isValidFormDate: boolean;
-  isValidFormFile: boolean;
-}
+const Form: FC = () => {
+  const formName = useRef<HTMLInputElement>(null);
+  const formDate = useRef<HTMLInputElement>(null);
+  const formGenderMale = useRef<HTMLInputElement>(null);
+  const formGenderFemale = useRef<HTMLInputElement>(null);
+  const formFile = useRef<HTMLInputElement>(null);
+  const formQuote = useRef<HTMLSelectElement>(null);
+  const formSubscribe = useRef<HTMLInputElement>(null);
 
-class Form extends React.Component<object, IFormState> {
-  formName: React.RefObject<HTMLInputElement>;
-  formDate: React.RefObject<HTMLInputElement>;
-  formGenderMale: React.RefObject<HTMLInputElement>;
-  formGenderFemale: React.RefObject<HTMLInputElement>;
-  formFile: React.RefObject<HTMLInputElement>;
-  formQuote: React.RefObject<HTMLSelectElement>;
-  formSubscribe: React.RefObject<HTMLInputElement>;
+  const [cardData, setCardData] = useState<IFormCardData[]>([]);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [isSuccessPopup, setIsSuccessPopup] = useState<boolean>(false);
+  const [isValidFormName, setIsValidFormName] = useState<boolean>(true);
+  const [isValidFormDate, setIsValidFormDate] = useState<boolean>(true);
+  const [isValidFormFile, setIsValidFormFile] = useState<boolean>(true);
 
-  constructor(props: object) {
-    super(props);
-    this.formName = createRef();
-    this.formDate = createRef();
-    this.formGenderMale = createRef();
-    this.formGenderFemale = createRef();
-    this.formFile = createRef();
-    this.formQuote = createRef();
-    this.formSubscribe = createRef();
-    this.state = {
-      cardData: [],
-      showPopup: false,
-      isSuccessPopup: false,
-      isValidFormName: true,
-      isValidFormDate: true,
-      isValidFormFile: true,
-    };
-  }
-  checkGender() {
-    if (this.formGenderMale.current!.checked) {
-      return this.formGenderMale.current!.value;
+  const checkGender = () => {
+    if (formGenderMale.current!.checked) {
+      return formGenderMale.current!.value;
     }
-    return this.formGenderFemale.current!.value;
-  }
+    return formGenderFemale.current!.value;
+  };
 
-  resetForm() {
-    this.formName.current!.value = '';
-    this.formDate.current!.value = '';
-    this.formGenderMale.current!.checked = true;
-    this.formFile.current!.value = '';
-    this.formQuote.current!.value = 'alan';
-    this.formSubscribe.current!.checked = false;
-  }
+  const resetForm = () => {
+    formName.current!.value = '';
+    formDate.current!.value = '';
+    formGenderMale.current!.checked = true;
+    formFile.current!.value = '';
+    formQuote.current!.value = 'alan';
+    formSubscribe.current!.checked = false;
+  };
 
-  async handleValidation() {
+  const handleValidation = async () => {
     let isValid = false;
     let isValidFormName = false;
     let isValidFormDate = false;
     let isValidFormFile = false;
-    const date = new Date(this.formDate.current!.value);
+    const date = new Date(formDate.current!.value);
     const fileTypes = ['image/gif', 'image/png', 'image/jpeg'];
-    this.setState({ isValidFormName: false, isValidFormDate: false, isValidFormFile: false });
+    setIsValidFormName(false);
+    setIsValidFormDate(false);
+    setIsValidFormFile(false);
     if (
-      this.formName.current?.value &&
-      this.formName.current!.value[0] === this.formName.current!.value[0].toUpperCase()
+      formName.current?.value &&
+      formName.current!.value[0] === formName.current!.value[0].toUpperCase()
     ) {
       isValidFormName = true;
     }
-    if (this.formDate.current?.value && date < new Date()) {
+    if (formDate.current?.value && date < new Date()) {
       isValidFormDate = true;
     }
-    if (
-      this.formFile.current?.files![0] &&
-      fileTypes.includes(this.formFile.current?.files![0].type)
-    ) {
+    if (formFile.current?.files![0] && fileTypes.includes(formFile.current?.files![0].type)) {
       isValidFormFile = true;
     }
     isValid = isValidFormDate && isValidFormFile && isValidFormName;
-    await this.setState({
-      isValidFormName: isValidFormName,
-      isValidFormDate: isValidFormDate,
-      isValidFormFile: isValidFormFile,
-    });
+    await setIsValidFormName(isValidFormName);
+    await setIsValidFormDate(isValidFormDate);
+    await setIsValidFormFile(isValidFormFile);
     return isValid;
-  }
+  };
 
-  async handleSubmit() {
-    if (await this.handleValidation()) {
+  const handleSubmit = async () => {
+    if (await handleValidation()) {
       const obj: IFormCardData = {
-        name: this.formName.current!.value,
-        birthday: this.formDate.current!.value,
-        gender: this.checkGender(),
-        picture: this.formFile.current!.files![0],
-        quote: this.formQuote.current!.value,
-        isSubscribed: this.formSubscribe.current!.checked,
+        name: formName.current!.value,
+        birthday: formDate.current!.value,
+        gender: checkGender(),
+        picture: formFile.current!.files![0],
+        quote: formQuote.current!.value,
+        isSubscribed: formSubscribe.current!.checked,
       };
-      this.setState({
-        cardData: [obj, ...this.state.cardData],
-        showPopup: true,
-        isSuccessPopup: true,
-      });
-      this.resetForm();
+      setCardData([obj, ...cardData]);
+      setShowPopup(true);
+      setIsSuccessPopup(true);
+      resetForm();
       setTimeout(() => {
-        this.setState({ showPopup: false });
+        setShowPopup(false);
       }, 3000);
     } else {
-      this.setState({ isSuccessPopup: false, showPopup: true });
+      setIsSuccessPopup(false);
+      setShowPopup(true);
       setTimeout(() => {
-        this.setState({ showPopup: false });
+        setShowPopup(false);
       }, 3000);
     }
-  }
+  };
 
-  render() {
-    return (
-      <>
-        <Header title="Form" />
-        <div className="page-container">
-          <form className="form-container">
-            <FormPersonal
-              formRef={{
-                formName: this.formName,
-                formDate: this.formDate,
-                formGenderMale: this.formGenderMale,
-                formGenderFemale: this.formGenderFemale,
-                formFile: this.formFile,
-              }}
-              isValidFormName={this.state.isValidFormName}
-              isValidFormDate={this.state.isValidFormDate}
-              isValidFormFile={this.state.isValidFormFile}
-            />
-            <FormQuotes formRef={this.formQuote} />
-            <FormControl formRef={this.formSubscribe} handleSubmit={() => this.handleSubmit()} />
-          </form>
-          <div className="form-cards-container">
-            {this.state.cardData.map((el, index) => (
-              <FormCard key={index} data={el} />
-            ))}
-          </div>
+  return (
+    <>
+      <Header title="Form" />
+      <div className="page-container">
+        <form className="form-container">
+          <FormPersonal
+            formRef={{
+              formName,
+              formDate,
+              formGenderMale,
+              formGenderFemale,
+              formFile,
+            }}
+            isValidFormName={isValidFormName}
+            isValidFormDate={isValidFormDate}
+            isValidFormFile={isValidFormFile}
+          />
+          <FormQuotes formRef={formQuote} />
+          <FormControl formRef={formSubscribe} handleSubmit={() => handleSubmit()} />
+        </form>
+        <div className="form-cards-container">
+          {cardData.map((el, index) => (
+            <FormCard key={index} data={el} />
+          ))}
         </div>
-        {this.state.showPopup && <Popup isSuccessful={this.state.isSuccessPopup} />}
-      </>
-    );
-  }
-}
+      </div>
+      {showPopup && <Popup isSuccessful={isSuccessPopup} />}
+    </>
+  );
+};
 
 export default Form;
