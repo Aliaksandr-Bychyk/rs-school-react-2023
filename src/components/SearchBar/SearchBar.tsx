@@ -1,40 +1,33 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import './SearchBar.css';
 
-interface ISearchBarState {
-  value: string;
-}
+const SearchBar: FC = () => {
+  const [searchBarValue, setSearchBarValue] = useState<string>(
+    (window.localStorage.getItem('search-value') as string) ?? ''
+  );
 
-class SearchBar extends React.Component<object, ISearchBarState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      value: (window.localStorage.getItem('search-value') as string) ?? '',
+  useEffect(() => {
+    return () => {
+      window.localStorage.setItem('search-value', searchBarValue as string);
     };
-  }
+  }, [searchBarValue]);
 
-  componentWillUnmount(): void {
-    window.localStorage.setItem('search-value', this.state.value as string);
-  }
+  const handleChange = (value: string): void => {
+    setSearchBarValue(value);
+  };
 
-  handleChange(value: string): void {
-    this.setState({ value: value });
-  }
-
-  render() {
-    return (
-      <div className="search-container">
-        <input
-          className="search-bar"
-          type="search"
-          placeholder="Type your request here..."
-          value={this.state.value}
-          onChange={(e) => this.handleChange(e.target.value)}
-        />
-        <input className="search-bar-button" type="button" value="SEARCH" />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-container">
+      <input
+        className="search-bar"
+        type="search"
+        placeholder="Type your request here..."
+        value={searchBarValue}
+        onChange={(e) => handleChange(e.target.value)}
+      />
+      <input className="search-bar-button" type="button" value="SEARCH" />
+    </div>
+  );
+};
 
 export default SearchBar;
