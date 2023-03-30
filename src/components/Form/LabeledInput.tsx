@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 import './LabeledInput.css';
 
 interface ILabeledInputProps extends Object {
@@ -13,18 +13,13 @@ interface ILabeledInputProps extends Object {
   isReversed?: boolean;
 }
 
-class LabeledInput extends Component<ILabeledInputProps> {
-  constructor(props: ILabeledInputProps) {
-    super(props);
-  }
-  render() {
-    return (
-      <label className={`${this.props.isReversed ? 'reversed' : ''} label-container`}>
-        <span className="ldi-label">{this.props.label}</span>
-        <input className="ldi-input" {...this.props.params} />
-      </label>
-    );
-  }
-}
+const LabeledInput: FC<ILabeledInputProps> = ({ label, params, isReversed }) => {
+  return (
+    <label className={`${isReversed ? 'reversed' : ''} label-container`}>
+      <span className="ldi-label">{label}</span>
+      <input className="ldi-input" {...params} />
+    </label>
+  );
+};
 
 export default LabeledInput;
