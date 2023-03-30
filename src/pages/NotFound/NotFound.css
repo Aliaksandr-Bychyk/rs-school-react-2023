@@ -1,0 +1,12 @@
+.not-found-container {
+  margin: auto;
+  width: fit-content;
+}
+.error-code {
+  font-size: 72px;
+  margin-bottom: 0;
+}
+.error-message {
+  font-size: 54px;
+  margin: 0;
+}
