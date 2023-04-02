@@ -101,7 +101,13 @@ const Form: FC = () => {
     <>
       <Header title="Form" />
       <div className="page-container">
-        <form className="form-container">
+        <form
+          className="form-container"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <FormPersonal
             formRef={{
               formName,
@@ -115,7 +121,7 @@ const Form: FC = () => {
             isValidFormFile={isValidFormFile}
           />
           <FormQuotes formRef={formQuote} />
-          <FormControl formRef={formSubscribe} handleSubmit={() => handleSubmit()} />
+          <FormControl formRef={formSubscribe} handleSubmit={handleSubmit} />
         </form>
         <div className="form-cards-container">
           {cardData.map((el, index) => (
