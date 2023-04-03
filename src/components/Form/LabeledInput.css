@@ -1,0 +1,19 @@
+.reversed {
+  flex-direction: row-reverse;
+}
+.label-container {
+  display: flex;
+  justify-content: start;
+  width: fit-content;
+}
+.ldi-label {
+  width: 150px;
+  cursor: pointer;
+}
+.ldi-input[type="text"],
+.ldi-input[type="date"] {
+  width: 200px;
+}
+.ldi-input[type="file"] {
+  cursor: pointer;
+}
