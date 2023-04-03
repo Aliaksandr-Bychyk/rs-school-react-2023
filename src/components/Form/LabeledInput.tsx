@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import './LabeledInput.css';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface ILabeledInputProps extends Object {
   label: string;
@@ -8,16 +9,16 @@ interface ILabeledInputProps extends Object {
     name?: string;
     value?: string;
     defaultChecked?: boolean;
-    ref?: React.RefObject<HTMLInputElement>;
   };
   isReversed?: boolean;
+  formRef?: UseFormRegisterReturn<string>;
 }
 
-const LabeledInput: FC<ILabeledInputProps> = ({ label, params, isReversed }) => {
+const LabeledInput: FC<ILabeledInputProps> = ({ label, params, isReversed, formRef }) => {
   return (
     <label className={`${isReversed ? 'reversed' : ''} label-container`}>
       <span className="ldi-label">{label}</span>
-      <input className="ldi-input" {...params} />
+      <input className="ldi-input" {...params} {...formRef} />
     </label>
   );
 };

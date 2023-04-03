@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import './FormQuotes.css';
+import { UseFormRegister } from 'react-hook-form';
+import IFormCardData from 'interfaces/IFormCardData';
 
 interface IFormQuotesProps {
-  formRef: React.RefObject<HTMLSelectElement>;
+  formRef: UseFormRegister<IFormCardData>;
 }
 
 const FormQuotes: FC<IFormQuotesProps> = ({ formRef }) => {
@@ -10,7 +12,7 @@ const FormQuotes: FC<IFormQuotesProps> = ({ formRef }) => {
     <div className="form-quotes-container">
       <label>
         Favorite quote:&nbsp;
-        <select ref={formRef}>
+        <select {...formRef('quote')}>
           <option value="alan">Alan Shepard</option>
           <option value="neli">Neil Armstrong</option>
           <option value="sally">Sally Ride</option>

@@ -1,36 +1,43 @@
 import React, { FC } from 'react';
 import LabeledInput from '../../../components/Form/LabeledInput';
 import './FormPersonal.css';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import IFormCardData from 'interfaces/IFormCardData';
 
 interface IFormPerosnalProps {
-  formRef: {
-    formName: React.RefObject<HTMLInputElement>;
-    formDate: React.RefObject<HTMLInputElement>;
-    formGenderMale: React.RefObject<HTMLInputElement>;
-    formGenderFemale: React.RefObject<HTMLInputElement>;
-    formFile: React.RefObject<HTMLInputElement>;
-  };
-  isValidFormName: boolean;
-  isValidFormDate: boolean;
-  isValidFormFile: boolean;
+  formRef: UseFormRegister<IFormCardData>;
+  formError: FieldErrors<FieldValues>;
 }
 
-const FormPersonal: FC<IFormPerosnalProps> = ({
-  formRef,
-  isValidFormName,
-  isValidFormDate,
-  isValidFormFile,
-}) => {
+const FormPersonal: FC<IFormPerosnalProps> = ({ formRef, formError }) => {
   return (
     <div className="form-personal-container">
-      <LabeledInput label="Name:" params={{ type: 'text', ref: formRef.formName }} />
-      {isValidFormName || (
+      <LabeledInput
+        label="Name:"
+        params={{ type: 'text' }}
+        formRef={formRef('name', {
+          required: true,
+          validate: {
+            isFirstUpper: (v) => v[0] === v[0].toUpperCase(),
+          },
+        })}
+      />
+      {formError.name && (
         <span className="not-valid">
           Field should not be empty and it should start with capital letter!
         </span>
       )}
-      <LabeledInput label="Birthday:" params={{ type: 'date', ref: formRef.formDate }} />
-      {isValidFormDate || (
+      <LabeledInput
+        label="Birthday:"
+        params={{ type: 'date' }}
+        formRef={formRef('birthday', {
+          required: true,
+          validate: {
+            isPast: (v) => new Date(v) < new Date(),
+          },
+        })}
+      />
+      {formError.birthday && (
         <span className="not-valid">Field should not be empty and less then current date!</span>
       )}
       <div>
@@ -42,9 +49,9 @@ const FormPersonal: FC<IFormPerosnalProps> = ({
             name: 'gender',
             value: 'male',
             defaultChecked: true,
-            ref: formRef.formGenderMale,
           }}
           isReversed={true}
+          formRef={formRef('gender')}
         />
         <LabeledInput
           label="Female:"
@@ -52,13 +59,22 @@ const FormPersonal: FC<IFormPerosnalProps> = ({
             type: 'radio',
             name: 'gender',
             value: 'female',
-            ref: formRef.formGenderFemale,
           }}
           isReversed={true}
+          formRef={formRef('gender')}
         />
       </div>
-      <LabeledInput label="Profile picture:" params={{ type: 'file', ref: formRef.formFile }} />
-      {isValidFormFile || <span className="not-valid">You should upload an image file!</span>}
+      <LabeledInput
+        label="Profile picture:"
+        params={{ type: 'file' }}
+        formRef={formRef('file', {
+          required: true,
+          validate: {
+            isImg: (v) => ['image/gif', 'image/png', 'image/jpeg'].includes(v![0].type),
+          },
+        })}
+      />
+      {formError.file && <span className="not-valid">You should upload an image file!</span>}
     </div>
   );
 };
