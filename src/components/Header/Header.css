@@ -11,6 +11,8 @@
   display: inline;
   margin: 0px 20px;
   color: #7161EF;
+  cursor: default;
+  user-select: none;
 }
 .navigation {
   display: inline;

@@ -1,6 +1,8 @@
 .search-container {
   margin: 30px auto;
   width: fit-content;
+}
+.search-controls {
   box-shadow: 0px 5px 5px 0px #DBCEF6;
 }
 .search-bar {
@@ -28,7 +30,6 @@
 .search-bar-button {
   height: 40px;
   border-radius: 0;
-  background-color: #7161EF;
   background-color: #1D193C;
   border: 1px #C9B5F2 solid;
   color: #FFFFFF;
@@ -40,5 +41,22 @@
   transition: 0.3s;
 }
 .search-bar-button:hover {
+  background-color: #7161EF;
+}
+.search-suggestions {
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+}
+.search-suggestion {
+  padding: 5px 10px;
+  background-color: #1D193C;
+  border: 0;
+  border-radius: 8px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.search-suggestion:hover {
   background-color: #7161EF;
 }
