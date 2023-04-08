@@ -4,12 +4,13 @@ import './Card.css';
 
 interface ICardProps {
   data: ICardData;
+  onClick: () => void;
 }
 
-const Card: FC<ICardProps> = ({ data }) => {
+const Card: FC<ICardProps> = ({ data, onClick }) => {
   const { title, imageUrl, newsSite, publishedAt } = data;
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={onClick}>
       <img
         className="card-image"
         src={imageUrl}

@@ -2,7 +2,13 @@
   width: fit-content;
   background-color: #FFFFFF;
   width: 450px;
+  cursor: pointer;
   box-shadow: 0px 5px 5px 0px #DBCEF6;
+  transition: 0.3s;
+}
+.card-container:hover {
+  box-shadow: 0px 5px 5px 5px #DBCEF6;
+  transform: scale(101%);
 }
 .card-image {
   width: 100%;
