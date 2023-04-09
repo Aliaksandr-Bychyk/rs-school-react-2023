@@ -1,5 +1,5 @@
-import { cleanup, fireEvent, render, renderHook, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, renderHook } from '@testing-library/react';
+import { describe, expect } from 'vitest';
 import CardPopup from './CardPopup';
 import React, { useState } from 'react';
 import ICardData from '../../interfaces/ICardData';
