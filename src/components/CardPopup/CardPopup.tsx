@@ -33,7 +33,7 @@ const CardPopup: FC<ICardPopupPros> = ({ data, setShowCardPopup }) => {
           </a>
           <span className="card-info-date">{data.publishedAt.slice(0, 10)}</span>
         </div>
-        <input className="card-popup-close" type="button" onClick={closePopup} />
+        <input className="card-popup-close" type="button" onClick={closePopup} alt="Close" />
       </div>
     </div>
   );
