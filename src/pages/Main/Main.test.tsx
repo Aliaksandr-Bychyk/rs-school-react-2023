@@ -14,4 +14,12 @@ describe('Main', () => {
 
     expect(screen.getAllByText(/Main/i)).toBeDefined();
   });
+  test('API', async () => {
+    const { findByText } = render(
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
+    );
+    expect(await findByText('Title')).toBeInTheDocument();
+  });
 });
