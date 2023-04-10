@@ -11,7 +11,9 @@ import './Main.css';
 
 const Main: FC = () => {
   const [items, setItems] = useState<ICardData[]>();
-  const [valueUrl, setValueUrl] = useState('');
+  const [valueUrl, setValueUrl] = useState(
+    (window.localStorage.getItem('search-value') as string) ?? ''
+  );
   const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, setValue } = useForm<{ 'search-bar': string }>();
   const [cardPopupData, setCardPopupData] = useState<ICardData>();
