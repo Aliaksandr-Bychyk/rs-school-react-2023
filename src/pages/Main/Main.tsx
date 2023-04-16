@@ -1,28 +1,24 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ICardData from '../../interfaces/ICardData';
 import CardStatus from '../../components/CardStatus/CardStatus';
-import getAPINews from '../../api/spaceflightnewsapi';
 import CardPopup from '../../components/CardPopup/CardPopup';
 import './Main.css';
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
+import { useGetAPINewsQuery } from '../../redux/apiSlice';
 
 const Main: FC = () => {
   const searchText = useSelector((state: RootState) => state['search-text'].value);
-  const [items, setItems] = useState<ICardData[]>();
   const [valueUrl, setValueUrl] = useState(searchText);
-  const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, setValue } = useForm<{ 'search-bar': string }>();
   const [cardPopupData, setCardPopupData] = useState<ICardData>();
   const [showCardPopup, setShowCardPopup] = useState(false);
 
-  useEffect(() => {
-    getAPINews(setItems, setIsLoading, valueUrl);
-  }, [valueUrl]);
+  const { data = [], isFetching } = useGetAPINewsQuery(valueUrl);
 
   const onSubmit = (data: { 'search-bar': string }) => {
     setValueUrl(data['search-bar']);
@@ -37,11 +33,11 @@ const Main: FC = () => {
     <>
       <Header title="Main" />
       <SearchBar formRef={register} handleOnSumbit={handleSubmit(onSubmit)} setValue={setValue} />
-      {isLoading ? (
+      {isFetching ? (
         <CardStatus title="Loading content..." />
-      ) : items!.length > 0 ? (
+      ) : data!.length > 0 ? (
         <div className="post-container">
-          {items!.map((el, index) => (
+          {data!.map((el, index) => (
             <Card key={index} data={el as ICardData} onClick={() => openCardPopup(el)} />
           ))}
         </div>
