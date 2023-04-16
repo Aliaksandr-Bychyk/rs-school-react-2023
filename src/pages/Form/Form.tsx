@@ -10,6 +10,9 @@ import './Form.css';
 import './FormControl/FormControl.css';
 import Popup from '../../components/Popup/Popup';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { addFromCard } from '../../redux/formCardSlice';
 
 const Form: FC = () => {
   const {
@@ -19,7 +22,9 @@ const Form: FC = () => {
     reset,
   } = useForm<IFormCardData>({ reValidateMode: 'onSubmit' });
 
-  const [cardData, setCardData] = useState<IFormCardData[]>([]);
+  const formCard = useSelector((state: RootState) => state['from-card'].value);
+  const dispatch = useDispatch();
+  const [cardData, setCardData] = useState<IFormCardData[]>(formCard);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [isSuccessPopup, setIsSuccessPopup] = useState<boolean>(false);
 
@@ -32,6 +37,7 @@ const Form: FC = () => {
       quote: data.quote,
       isSubscribed: data.isSubscribed,
     };
+    dispatch(addFromCard(obj));
     setCardData([obj, ...cardData]);
     setShowPopup(true);
     setIsSuccessPopup(true);
