@@ -8,12 +8,13 @@ import CardStatus from '../../components/CardStatus/CardStatus';
 import getAPINews from '../../api/spaceflightnewsapi';
 import CardPopup from '../../components/CardPopup/CardPopup';
 import './Main.css';
+import { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 const Main: FC = () => {
+  const searchText = useSelector((state: RootState) => state['search-text'].value);
   const [items, setItems] = useState<ICardData[]>();
-  const [valueUrl, setValueUrl] = useState(
-    (window.localStorage.getItem('search-value') as string) ?? ''
-  );
+  const [valueUrl, setValueUrl] = useState(searchText);
   const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, setValue } = useForm<{ 'search-bar': string }>();
   const [cardPopupData, setCardPopupData] = useState<ICardData>();

@@ -1,6 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import './SearchBar.css';
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { RootState } from 'redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue } from '../../redux/searchTextSlice';
 
 interface ISearchBarProps {
   formRef: UseFormRegister<{ 'search-bar': string }>;
@@ -9,19 +12,15 @@ interface ISearchBarProps {
 }
 
 const SearchBar: FC<ISearchBarProps> = ({ formRef, handleOnSumbit, setValue }) => {
-  const [searchBarValue, setSearchBarValue] = useState<string>(
-    (window.localStorage.getItem('search-value') as string) ?? ''
-  );
+  const searchText = useSelector((state: RootState) => state['search-text'].value);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      window.localStorage.setItem('search-value', searchBarValue as string);
-    };
-  }, [searchBarValue]);
+  const [searchBarValue, setSearchBarValue] = useState<string>(searchText);
 
   const handleChange = (value: string): void => {
     setSearchBarValue(value);
     setValue('search-bar', value);
+    dispatch(setSearchValue(value));
   };
 
   const suggestions = ['Space', 'Mars', 'Nasa'];
