@@ -18,7 +18,7 @@ const Main: FC = () => {
   const [cardPopupData, setCardPopupData] = useState<ICardData>();
   const [showCardPopup, setShowCardPopup] = useState(false);
 
-  const { data = [], isFetching } = useGetAPINewsQuery(valueUrl);
+  const { data = [], isFetching, error, isLoading } = useGetAPINewsQuery(valueUrl);
 
   const onSubmit = (data: { 'search-bar': string }) => {
     setValueUrl(data['search-bar']);
@@ -33,16 +33,18 @@ const Main: FC = () => {
     <>
       <Header title="Main" />
       <SearchBar formRef={register} handleOnSumbit={handleSubmit(onSubmit)} setValue={setValue} />
-      {isFetching ? (
+      {error ? (
+        <CardStatus title="There is some error..." />
+      ) : isLoading || isFetching ? (
         <CardStatus title="Loading content..." />
-      ) : data!.length > 0 ? (
-        <div className="post-container">
-          {data!.map((el, index) => (
-            <Card key={index} data={el as ICardData} onClick={() => openCardPopup(el)} />
-          ))}
-        </div>
       ) : (
-        <CardStatus title="No content found..." />
+        data && (
+          <div className="post-container">
+            {data!.map((el, index) => (
+              <Card key={index} data={el as ICardData} onClick={() => openCardPopup(el)} />
+            ))}
+          </div>
+        )
       )}
       {showCardPopup && <CardPopup data={cardPopupData!} setShowCardPopup={setShowCardPopup} />}
     </>

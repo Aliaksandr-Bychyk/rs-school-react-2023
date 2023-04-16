@@ -11,7 +11,10 @@ export const store = configureStore({
     [spaceFlightNewsApi.reducerPath]: spaceFlightNewsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(spaceFlightNewsApi.middleware),
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }).concat(spaceFlightNewsApi.middleware),
 });
 
 setupListeners(store.dispatch);

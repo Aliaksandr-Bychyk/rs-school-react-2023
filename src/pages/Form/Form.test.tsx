@@ -3,13 +3,17 @@ import { describe, expect } from 'vitest';
 import Form from './Form';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../../redux/store';
 
 describe('Accordion', () => {
   beforeEach(() => {
     render(
-      <BrowserRouter>
-        <Form />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Form />
+        </BrowserRouter>
+      </Provider>
     );
   });
 

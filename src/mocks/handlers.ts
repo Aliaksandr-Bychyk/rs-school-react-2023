@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 const handlers = [
-  rest.get(`https://api.spaceflightnewsapi.net/v3/articles`, (request, responce, context) => {
+  rest.get(`https://api.spaceflightnewsapi.net/v3/*`, (request, responce, context) => {
     return responce(
       context.status(200),
       context.json([
