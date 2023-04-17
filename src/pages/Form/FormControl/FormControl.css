@@ -1,0 +1,24 @@
+.control-container {
+  display: flex;
+  margin: 20px 0;
+  justify-content: flex-end;
+  width: 100vw;
+}
+.control-container > .label-container > .ldi-label {
+  width: fit-content;  
+  line-height: 2;
+}
+.control-button-submit {
+  margin-left: 20px;
+  padding: 10px 30px;
+  font-size: 16px;
+  border: 0;
+  background-color: #1D193C;
+  color: white;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.control-button-submit:hover {
+  background-color: #7161EF;
+}
