@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react()],
   test: {
     globals: true,
@@ -16,5 +17,9 @@ export default defineConfig({
       provider: 'istanbul',
       exclude: ['src/index.tsx'],
     },
+  },
+  build: {
+    minify: false,
+    outDir: './dist',
   },
 });
