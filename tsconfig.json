@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "rootDir": "./",
+    "outDir": "./dist",
   },
   "include": ["./src/**/*", "styled.d.ts"]
 }
