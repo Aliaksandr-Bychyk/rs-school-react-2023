@@ -4,13 +4,16 @@ import Router from './Router';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Router', async () => {
   it('Renders', () => {
     const { findAllByText } = render(
-      <Provider store={store}>
-        <Router />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <Router />
+        </Provider>
+      </BrowserRouter>
     );
     expect(findAllByText(/MAIN/i)).toBeDefined();
   });

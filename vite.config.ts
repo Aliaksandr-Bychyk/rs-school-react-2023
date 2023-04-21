@@ -15,7 +15,7 @@ export default defineConfig({
     coverage: {
       all: true,
       provider: 'istanbul',
-      exclude: ['src/index.tsx', 'src/entry-client.tsx', 'src/entry-server.tsx'],
+      exclude: ['src/index.tsx', 'src/entry-client.tsx', 'src/entry-server.tsx', 'server.ts'],
     },
   },
   build: {
