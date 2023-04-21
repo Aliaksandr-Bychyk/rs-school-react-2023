@@ -47,5 +47,6 @@
       "pragma": "React",
       "version": "detect"
     }
-  }
+  },
+  "ignorePatterns": ["dist/"]
 }
