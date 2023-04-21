@@ -22,4 +22,6 @@
     "outDir": "./dist",
   },
   "include": ["./src/**/*", "styled.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "ts-node": { "esm": true, "experimentalSpecifierResolution": "node" }
 }

@@ -8,9 +8,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 hydrateRoot(
   document.getElementById('root') as HTMLElement,
-  <BrowserRouter>
+  <React.StrictMode>
     <Provider store={store}>
-      <Router />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </Provider>
-  </BrowserRouter>
+  </React.StrictMode>
 );
