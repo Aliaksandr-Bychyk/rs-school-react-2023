@@ -4,7 +4,9 @@ import SearcBar from './SearchBar';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Provider } from 'react-redux';
-import { store } from '../../redux/store';
+import { createStore } from '../../redux/store';
+
+const store = createStore();
 
 describe('SearchBar', () => {
   const { result } = renderHook(() => useForm<{ 'search-bar': string }>());

@@ -4,7 +4,9 @@ import Main from './Main';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from '../../redux/store';
+import { createStore } from '../../redux/store';
+
+const store = createStore();
 
 describe('Main', () => {
   it('Renders', async () => {
