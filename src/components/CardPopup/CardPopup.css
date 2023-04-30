@@ -9,6 +9,10 @@
   background-color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
+.card-popup-article {
+  flex: 1;
+  overflow-y: auto;
+}
 .card-popup-content {
   position: relative;  
   display: flex;
