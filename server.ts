@@ -3,6 +3,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
+import { createStore } from './src/redux/store';
+import { spaceFlightNewsApi } from './src/redux/apiSlice';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = 5173;
@@ -26,13 +28,25 @@ async function createServer() {
 
       const render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render;
 
+      const store = createStore();
+      await store.dispatch(spaceFlightNewsApi.endpoints.getAPINews.initiate(''));
+      const preloadedState = store.getState();
+      const injectPreload = () => {
+        return `
+        <script>
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
+        </script>
+        `;
+      };
+
       res.write(startAppHTML);
-      const appHtml = await render(url, {
+      const appHtml = await render(url, store, {
         onShellReady() {
           appHtml.pipe(res);
         },
         onAllReady() {
-          res.write(endAppHTML);
+          const preload = endAppHTML.replace('<!--ssr-preload-->', injectPreload());
+          res.write(preload);
           res.end();
         },
       });

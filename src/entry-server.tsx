@@ -3,9 +3,9 @@ import { StaticRouter } from 'react-router-dom/server';
 import React from 'react';
 import Router from './router/Router';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 
-export function render(url: string, options: RenderToPipeableStreamOptions) {
+export function render(url: string, store: ToolkitStore, options: RenderToPipeableStreamOptions) {
   return renderToPipeableStream(
     <React.StrictMode>
       <Provider store={store}>

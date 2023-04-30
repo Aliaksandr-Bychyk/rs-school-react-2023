@@ -1,4 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+import IRTK from '../interfaces/IRTK';
+const { createSlice } = ((toolkitRaw as IRTK).default ?? toolkitRaw) as typeof toolkitRaw;
 
 export interface ISearchTextSlice {
   value: string;
@@ -12,7 +14,7 @@ export const searchTextSlice = createSlice({
   name: 'search-text',
   initialState,
   reducers: {
-    setSearchValue: (state, action: PayloadAction<string>) => {
+    setSearchValue: (state, action: toolkitRaw.PayloadAction<string>) => {
       state.value = action.payload;
     },
   },

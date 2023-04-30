@@ -1,4 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import * as rtkQuery from '@reduxjs/toolkit/dist/query/react';
+import IRTK from '../interfaces/IRTK';
+
+const { createApi, fetchBaseQuery } = ((rtkQuery as IRTK).default ?? rtkQuery) as typeof rtkQuery;
+
 import ICardData from '../interfaces/ICardData';
 
 export const spaceFlightNewsApi = createApi({
