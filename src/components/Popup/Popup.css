@@ -1,0 +1,15 @@
+.popup-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 25px;
+}
+.popup-success {
+  background-color: #9acd32;
+}
+.popup-fail {
+  background-color: #cd3232;
+}
