@@ -21,7 +21,13 @@
     "rootDir": "./",
     "outDir": "./dist",
   },
-  "include": ["./src/**/*", "styled.d.ts"],
+  "include": [
+    "./src/**/*", 
+    "styled.d.ts", 
+    "./cypress/**/*.ts",
+    "./node_modules/cypress",
+    "cypress/**/*.js"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }],
   "ts-node": { "esm": true, "experimentalSpecifierResolution": "node" }
 }

@@ -1,4 +1,6 @@
 coverage
+.nyc_output
+cypress/videos
 # Logs
 logs
 *.log
